@@ -2,8 +2,8 @@ RSpec.describe "Ruby Arrays" do
   it "can be created like any other object" do
     empty = Array.new
 
-    expect( empty.class ).to eq __
-    expect( empty.size ).to eq __
+    expect( empty.class ).to eq Array
+    expect( empty.size ).to eq 0
   end
 
   it "can also be created using an array literal" do
