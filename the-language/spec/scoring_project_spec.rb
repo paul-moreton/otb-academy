@@ -26,37 +26,60 @@
 # More scoring examples are given in the tests below:
 #
 # Your goal is to write the score method.
-
 def score(dice)
-  # You need to write this method
+    points = 1000 * (dice.count(1) / 3)
+    points += 100 * (dice.count(1) % 3)
+    points += 50 * (dice.count(5) % 3)
+    (2..6).each do |i|
+        points += (1009 * i) * (dice.count(i) / 3)
+    end
+    points
 end
+
+# def score(dice)
+#     score = 0
+#     number_amounts = dice.inject(Hash.new(0)) { |hash, numb| hash[numb] += 1; hash }
+#     number_amounts.each do |key, value|
+#       score += (value % 3) * 100 + value / 3 * 1000 if (key == 1)
+#       score += (value % 3) * 50 + value / 3 * key * 100 if (key == 5)
+#       score += (value / 3) * key * 100 if (key != 1 && key != 5)
+#     end
+#     score
+# end
 
 RSpec.describe "scorign a game of greed" do
   it "scores an empty list as 0" do
+
     expect( score([]) ).to eq( 0 )
   end
 
   it "scores a single 5 as 50" do
+
     expect( score([5]) ).to eq( 50 )
   end
 
   it "scores a single 1 as 100" do
+
     expect( score([1]) ).to eq( 100 )
   end
 
   it "scores multiple 1s and 5s as a sum of the individual scores" do
+
     expect( score([1,5,5,1]) ).to eq( 300 )
   end
 
   it "scores 2s, 3s, 4s, and 6s as 0" do
+
     expect( score([2,3,4,6]) ).to eq( 0 )
   end
 
   it "scores triple 1 as 1000" do
+
     expect( score([1,1,1]) ).to eq( 1000 )
   end
 
   it "scores other triples as face value * 100" do
+
     expect( score([2,2,2]) ).to eq( 200 )
     expect( score([3,3,3]) ).to eq( 300 )
     expect( score([4,4,4]) ).to eq( 400 )
@@ -65,6 +88,7 @@ RSpec.describe "scorign a game of greed" do
   end
 
   it "can score mixed throws" do
+
     expect( score([2,5,2,2,3]) ).to eq( 250 )
     expect( score([5,5,5,5]) ).to eq( 550 )
     expect( score([1,1,1,1]) ).to eq( 1100 )
@@ -73,4 +97,3 @@ RSpec.describe "scorign a game of greed" do
   end
 
 end
-

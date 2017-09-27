@@ -13,7 +13,7 @@ RSpec.describe "Ruby Arrays" do
     expect( array ).to eq( [1] )
 
     array[1] = 2
-    expect( array ).to eq( [1, __] )
+    expect( array ).to eq( [1, 2] )
 
     array << 333
     expect( array ).to eq( __ )
